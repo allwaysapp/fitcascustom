@@ -18,7 +18,7 @@
       promoButton.style.textAlign = 'center';
       promoButton.style.padding = '10px 0';
       promoButton.style.marginTop = '10px';
-      promoButton.style.borderRadius = '4px';
+      promoButton.style.borderRadius = '10px';
       promoButton.style.cursor = 'pointer';
       promoButton.style.fontWeight = 'bold';
       promoButton.style.fontSize = '16px';
@@ -41,7 +41,7 @@
       fitcasButton.style.textAlign = 'center';
       fitcasButton.style.padding = '10px 0';
       fitcasButton.style.marginTop = '10px';
-      fitcasButton.style.borderRadius = '4px';
+      fitcasButton.style.borderRadius = '10px';
       fitcasButton.style.cursor = 'pointer';
       fitcasButton.style.fontWeight = 'bold';
       fitcasButton.style.fontSize = '16px';
