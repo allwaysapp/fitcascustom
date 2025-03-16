@@ -22,7 +22,7 @@
     promoButton.style.borderRadius = '4px';
     promoButton.style.cursor = 'pointer';
     promoButton.style.fontWeight = 'bold';
-    promoButton.style.fontSize = '14px';
+    promoButton.style.fontSize = '16px';
     
     sidebarLinks.appendChild(promoButton);
     console.log("Promosyonlar butonu eklendi:", promoButton);
