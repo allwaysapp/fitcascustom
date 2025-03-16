@@ -9,7 +9,7 @@
     
     const promoButton = document.createElement('a');
     promoButton.href = '/tr/promotions';
-    promoButton.textContent = 'Promosyonlar';
+    promoButton.textContent = 'PROMOSYONLAR';
     
     // Stil ayarları
     promoButton.style.display = 'block';
