@@ -16,7 +16,7 @@
       promoButton.style.backgroundColor = '#007BFF';
       promoButton.style.color = '#fff';
       promoButton.style.textAlign = 'center';
-      promoButton.style.padding = '10px 0';
+      promoButton.style.padding = '14px 0';
       promoButton.style.marginTop = '10px';
       promoButton.style.borderRadius = '10px';
       promoButton.style.cursor = 'pointer';
@@ -36,10 +36,10 @@
       // Stil ayarları (Promosyonlar ile aynı, isterseniz renk vb. değiştirebilirsiniz)
       fitcasButton.style.display = 'block';
       fitcasButton.style.width = '100%';
-      fitcasButton.style.backgroundColor = '#007BFF';
+      fitcasButton.style.backgroundColor = '#ffc107';
       fitcasButton.style.color = '#fff';
       fitcasButton.style.textAlign = 'center';
-      fitcasButton.style.padding = '10px 0';
+      fitcasButton.style.padding = '14px 0';
       fitcasButton.style.marginTop = '10px';
       fitcasButton.style.borderRadius = '10px';
       fitcasButton.style.cursor = 'pointer';
