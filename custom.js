@@ -1,5 +1,5 @@
-(function() {
-  // Butonları ekleyen fonksiyon
+(function () {
+  // 1) SIDEBAR BUTONLARINI EKLEYEN FONKSİYON
   function addCustomButtons() {
     const sidebarLinks = document.querySelector('.sidebar__links');
     if (!sidebarLinks) return;
@@ -24,7 +24,7 @@
       fitcasTVButton.style.fontSize = '16px';
 
       sidebarLinks.appendChild(fitcasTVButton);
-      console.log("FitCas TV butonu eklendi:", fitcasTVButton);
+      console.log('FitCas TV butonu eklendi:', fitcasTVButton);
     }
 
     // 2) FitCas ÇARK butonu
@@ -47,7 +47,7 @@
       fitcasCarkButton.style.fontSize = '16px';
 
       sidebarLinks.appendChild(fitcasCarkButton);
-      console.log("FitCas ÇARK butonu eklendi:", fitcasCarkButton);
+      console.log('FitCas ÇARK butonu eklendi:', fitcasCarkButton);
     }
 
     // 3) Promosyonlar butonu (Arkaplan görseli)
@@ -75,19 +75,112 @@
       promoButton.style.fontSize = '16px';
 
       sidebarLinks.appendChild(promoButton);
-      console.log("Promosyonlar butonu eklendi:", promoButton);
+      console.log('Promosyonlar butonu eklendi:', promoButton);
     }
   }
 
-  // Sayfa yüklenirken butonları eklemeyi deneyelim
-  addCustomButtons();
+  // 2) HEADER BUTONLARINI EKLEYEN FONKSİYON
+  function addHeaderLinks() {
+    const headerActions = document.querySelector('.header__actions');
+    if (!headerActions) return;
 
-  // DOM’da değişiklik olduğunda tekrar kontrol etmek için MutationObserver kullanalım
-  const observer = new MutationObserver((mutations, obs) => {
+    // Giriş butonunu bul (hedef referans noktası)
+    const signInBtn = headerActions.querySelector('.header__signin');
+
+    // 1) Fit TV linki
+    if (!headerActions.querySelector('.header__fitTv')) {
+      const fitTvLink = document.createElement('a');
+      fitTvLink.className = 'header__fitTv';
+      fitTvLink.href = 'https://fitcastv.com/';
+      fitTvLink.target = '_blank'; // Yeni sekmede açmak istersen
+      // Stil
+      fitTvLink.style.display = 'inline-flex';
+      fitTvLink.style.alignItems = 'center';
+      fitTvLink.style.backgroundImage =
+        'linear-gradient(to right, #43e97b 0%, #38f9d7 100%)';
+      fitTvLink.style.borderRadius = '8px';
+      fitTvLink.style.color = '#fff';
+      fitTvLink.style.padding = '8px 12px';
+      fitTvLink.style.fontWeight = 'bold';
+      fitTvLink.style.textDecoration = 'none';
+      fitTvLink.style.cursor = 'pointer';
+      // Butonlar arası boşluk eklemek istersen:
+      // fitTvLink.style.marginRight = '8px';
+
+      // İçerik: İkon + Metin
+      fitTvLink.innerHTML = `
+        <img 
+          src="https://github.com/allwaysapp/fitcascustom/blob/main/tv.png?raw=true" 
+          alt="Fit TV Icon" 
+          style="width: 20px; height: auto; margin-right: 8px;"
+        />
+        <span>Fit TV</span>
+      `;
+
+      // Eğer Giriş butonu varsa, ondan önce ekle; yoksa en sona ekle
+      if (signInBtn) {
+        headerActions.insertBefore(fitTvLink, signInBtn);
+      } else {
+        headerActions.appendChild(fitTvLink);
+      }
+      console.log('Fit TV linki eklendi:', fitTvLink);
+    }
+
+    // 2) Fit ÇARK linki
+    if (!headerActions.querySelector('.header__fitCark')) {
+      const fitCarkLink = document.createElement('a');
+      fitCarkLink.className = 'header__fitCark';
+      fitCarkLink.href = 'https://api.fitcark.com/wheel/';
+      fitCarkLink.target = '_blank';
+      // Stil
+      fitCarkLink.style.display = 'inline-flex';
+      fitCarkLink.style.alignItems = 'center';
+      fitCarkLink.style.backgroundImage =
+        'linear-gradient(to right, #ff0844 0%, #ffb199 100%)';
+      fitCarkLink.style.borderRadius = '8px';
+      fitCarkLink.style.color = '#fff';
+      fitCarkLink.style.padding = '8px 12px';
+      fitCarkLink.style.fontWeight = 'bold';
+      fitCarkLink.style.textDecoration = 'none';
+      fitCarkLink.style.cursor = 'pointer';
+
+      fitCarkLink.innerHTML = `
+        <img 
+          src="https://github.com/allwaysapp/fitcascustom/blob/main/wheel.png?raw=true" 
+          alt="Fit ÇARK Icon" 
+          style="width: 20px; height: auto; margin-right: 8px;"
+        />
+        <span>Fit ÇARK</span>
+      `;
+
+      if (signInBtn) {
+        headerActions.insertBefore(fitCarkLink, signInBtn);
+      } else {
+        headerActions.appendChild(fitCarkLink);
+      }
+      console.log('Fit ÇARK linki eklendi:', fitCarkLink);
+    }
+  }
+
+  // 3) SAYFA YÜKLENİRKEN İLK ÇAĞRI
+  addCustomButtons();
+  addHeaderLinks();
+
+  // 4) SIDEBAR İÇİN MUTATIONOBSERVER
+  const sidebarObserver = new MutationObserver((mutations, obs) => {
     if (document.querySelector('.sidebar__links')) {
       addCustomButtons();
-      obs.disconnect(); // Butonlar eklendiyse observer'ı kapatıyoruz
+      obs.disconnect(); // Butonlar eklenince observer'ı kapat
     }
   });
-  observer.observe(document.body, { childList: true, subtree: true });
+  sidebarObserver.observe(document.body, { childList: true, subtree: true });
+
+  // 5) HEADER İÇİN MUTATIONOBSERVER
+  const headerObserver = new MutationObserver((mutations, obs) => {
+    if (document.querySelector('.header__actions')) {
+      addHeaderLinks();
+      obs.disconnect(); // Linkler eklenince observer'ı kapat
+    }
+  });
+  headerObserver.observe(document.body, { childList: true, subtree: true });
 })();
