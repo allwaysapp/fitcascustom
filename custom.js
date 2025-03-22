@@ -4,12 +4,35 @@
     const sidebarLinks = document.querySelector('.sidebar__links');
     if (!sidebarLinks) return;
 
-     // 1) Promosyonlar butonu
+    // 1) FitCas TV butonu
+    if (!sidebarLinks.querySelector('a[href="https://fitcastv.com/"]')) {
+      const fitcasButton = document.createElement('a');
+      fitcasButton.href = 'https://fitcastv.com/';
+      fitcasButton.textContent = 'FITCAS TV';
+
+      // Stil ayarları
+      fitcasButton.style.display = 'block';
+      fitcasButton.style.width = '100%';
+      fitcasButton.style.backgroundColor = '#ffc107';
+      fitcasButton.style.color = '#fff';
+      fitcasButton.style.textAlign = 'center';
+      fitcasButton.style.padding = '14px 0';
+      fitcasButton.style.marginTop = '10px';
+      fitcasButton.style.borderRadius = '10px';
+      fitcasButton.style.cursor = 'pointer';
+      fitcasButton.style.fontWeight = 'bold';
+      fitcasButton.style.fontSize = '16px';
+
+      sidebarLinks.appendChild(fitcasButton);
+      console.log("FitCas TV butonu eklendi:", fitcasButton);
+    }
+
+    // 2) Promosyonlar butonu
     if (!sidebarLinks.querySelector('a[href="/tr/promotions"]')) {
       const promoButton = document.createElement('a');
       promoButton.href = '/tr/promotions';
       promoButton.textContent = 'PROMOSYONLAR';
-      
+
       // Stil ayarları
       promoButton.style.display = 'block';
       promoButton.style.width = '100%';
@@ -25,29 +48,6 @@
 
       sidebarLinks.appendChild(promoButton);
       console.log("Promosyonlar butonu eklendi:", promoButton);
-    }
-
-     // 2) FitCas TV butonu
-    if (!sidebarLinks.querySelector('a[href="https://fitcastv.com/"]')) {
-      const fitcasButton = document.createElement('a');
-      fitcasButton.href = 'https://fitcastv.com/';
-      fitcasButton.textContent = 'FITCAS TV';
-
-      // Stil ayarları (Promosyonlar ile aynı, isterseniz renk vb. değiştirebilirsiniz)
-      fitcasButton.style.display = 'block';
-      fitcasButton.style.width = '100%';
-      fitcasButton.style.backgroundColor = '#ffc107';
-      fitcasButton.style.color = '#fff';
-      fitcasButton.style.textAlign = 'center';
-      fitcasButton.style.padding = '14px 0';
-      fitcasButton.style.marginTop = '10px';
-      fitcasButton.style.borderRadius = '10px';
-      fitcasButton.style.cursor = 'pointer';
-      fitcasButton.style.fontWeight = 'bold';
-      fitcasButton.style.fontSize = '16px';
-
-      sidebarLinks.appendChild(fitcasButton);
-      console.log("FitCas TV butonu eklendi:", fitcasButton);
     }
   }
 
