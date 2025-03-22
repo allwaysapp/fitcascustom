@@ -33,10 +33,10 @@
       fitcasCarkButton.href = 'https://api.fitcark.com/wheel/';
       fitcasCarkButton.textContent = 'FITCAS ÇARK';
 
-      // Stil ayarları (Promosyonlar butonu ile benzer, farklı renk tercih edebilirsiniz)
+      // Stil ayarları
       fitcasCarkButton.style.display = 'block';
       fitcasCarkButton.style.width = '100%';
-      fitcasCarkButton.style.backgroundColor = '#28a745';  // Yeşil renk
+      fitcasCarkButton.style.backgroundColor = '#28a745'; // Yeşil renk
       fitcasCarkButton.style.color = '#fff';
       fitcasCarkButton.style.textAlign = 'center';
       fitcasCarkButton.style.padding = '14px 0';
@@ -50,16 +50,21 @@
       console.log("FitCas ÇARK butonu eklendi:", fitcasCarkButton);
     }
 
-    // 3) Promosyonlar butonu
+    // 3) Promosyonlar butonu (Arkaplan görseli)
     if (!sidebarLinks.querySelector('a[href="/tr/promotions"]')) {
       const promoButton = document.createElement('a');
       promoButton.href = '/tr/promotions';
       promoButton.textContent = 'PROMOSYONLAR';
       
-      // Stil ayarları
+      // Arkaplan resmi ayarları
       promoButton.style.display = 'block';
       promoButton.style.width = '100%';
-      promoButton.style.backgroundColor = '#007BFF';
+      promoButton.style.backgroundImage = 'url("https://raw.githubusercontent.com/allwaysapp/fitcascustom/refs/heads/main/promosyonlar.png")';
+      promoButton.style.backgroundPosition = 'center';
+      promoButton.style.backgroundSize = 'cover';
+      promoButton.style.backgroundRepeat = 'no-repeat';
+      
+      // Diğer stil ayarları
       promoButton.style.color = '#fff';
       promoButton.style.textAlign = 'center';
       promoButton.style.padding = '14px 0';
