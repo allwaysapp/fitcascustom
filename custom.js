@@ -4,30 +4,7 @@
     const sidebarLinks = document.querySelector('.sidebar__links');
     if (!sidebarLinks) return;
 
-    // 1) Promosyonlar butonu
-    if (!sidebarLinks.querySelector('a[href="/tr/promotions"]')) {
-      const promoButton = document.createElement('a');
-      promoButton.href = '/tr/promotions';
-      promoButton.textContent = 'PROMOSYONLAR';
-      
-      // Stil ayarları
-      promoButton.style.display = 'block';
-      promoButton.style.width = '100%';
-      promoButton.style.backgroundColor = '#007BFF';
-      promoButton.style.color = '#fff';
-      promoButton.style.textAlign = 'center';
-      promoButton.style.padding = '14px 0';
-      promoButton.style.marginTop = '10px';
-      promoButton.style.borderRadius = '10px';
-      promoButton.style.cursor = 'pointer';
-      promoButton.style.fontWeight = 'bold';
-      promoButton.style.fontSize = '16px';
-
-      sidebarLinks.appendChild(promoButton);
-      console.log("Promosyonlar butonu eklendi:", promoButton);
-    }
-
-    // 2) FitCas TV butonu
+     // 1) FitCas TV butonu
     if (!sidebarLinks.querySelector('a[href="https://fitcastv.com/"]')) {
       const fitcasButton = document.createElement('a');
       fitcasButton.href = 'https://fitcastv.com/';
@@ -50,6 +27,31 @@
       console.log("FitCas TV butonu eklendi:", fitcasButton);
     }
   }
+
+    // 2) Promosyonlar butonu
+    if (!sidebarLinks.querySelector('a[href="/tr/promotions"]')) {
+      const promoButton = document.createElement('a');
+      promoButton.href = '/tr/promotions';
+      promoButton.textContent = 'PROMOSYONLAR';
+      
+      // Stil ayarları
+      promoButton.style.display = 'block';
+      promoButton.style.width = '100%';
+      promoButton.style.backgroundColor = '#007BFF';
+      promoButton.style.color = '#fff';
+      promoButton.style.textAlign = 'center';
+      promoButton.style.padding = '14px 0';
+      promoButton.style.marginTop = '10px';
+      promoButton.style.borderRadius = '10px';
+      promoButton.style.cursor = 'pointer';
+      promoButton.style.fontWeight = 'bold';
+      promoButton.style.fontSize = '16px';
+
+      sidebarLinks.appendChild(promoButton);
+      console.log("Promosyonlar butonu eklendi:", promoButton);
+    }
+
+   
 
   // Sayfa yüklenirken butonları eklemeyi deneyelim
   addCustomButtons();
