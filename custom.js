@@ -162,6 +162,16 @@
     }
   }
 
+
+const bannersWrapper = document.getElementById('banners-wrapper');
+
+const topGamesWrapper = document.getElementById('top-games-wrapper');
+
+const parent = topGamesWrapper.parentNode;
+
+
+parent.insertBefore(bannersWrapper, topGamesWrapper);
+
   // 3) SAYFA YÜKLENİRKEN İLK ÇAĞRI
   addCustomButtons();
   addHeaderLinks();
