@@ -1,181 +1,378 @@
 (function () {
-  // 1) SIDEBAR BUTONLARINI EKLEYEN FONKSİYON
-  function addCustomButtons() {
-    const sidebarLinks = document.querySelector('.sidebar__links');
-    if (!sidebarLinks) return;
+    // Geçiş sırasında özel bölümlerin görünmesini engellemek için flag
+    let isNavigating = false;
 
-    // 1) FitCas TV butonu
-    if (!sidebarLinks.querySelector('a[href="https://fitcastv.com/"]')) {
-      const fitcasTVButton = document.createElement('a');
-      fitcasTVButton.href = 'https://fitcastv.com/';
-      fitcasTVButton.textContent = 'FITCAS TV';
-      Object.assign(fitcasTVButton.style, {
-        display: 'block',
-        width: '100%',
-        backgroundColor: '#ffc107',
-        color: '#fff',
-        textAlign: 'center',
-        padding: '14px 0',
-        marginTop: '10px',
-        borderRadius: '10px',
-        cursor: 'pointer',
-        fontWeight: 'bold',
-        fontSize: '16px'
-      });
-      sidebarLinks.appendChild(fitcasTVButton);
-      console.log('FitCas TV butonu eklendi:', fitcasTVButton);
+    // Anasayfa olup olmadığını kontrol eden fonksiyon
+    function isHomePage() {
+        const url = window.location.pathname;
+        return url === '/' || 
+               url === '/tr/' || 
+               url === '/tr' || 
+               url === '/en/' || 
+               url === '/en';
     }
 
-    // 2) FitCas ÇARK butonu
-    if (!sidebarLinks.querySelector('a[href="https://api.fitcark.com/wheel/"]')) {
-      const fitcasCarkButton = document.createElement('a');
-      fitcasCarkButton.href = 'https://api.fitcark.com/wheel/';
-      fitcasCarkButton.textContent = 'FITCAS ÇARK';
-      Object.assign(fitcasCarkButton.style, {
-        display: 'block',
-        width: '100%',
-        backgroundColor: '#28a745',
-        color: '#fff',
-        textAlign: 'center',
-        padding: '14px 0',
-        marginTop: '10px',
-        borderRadius: '10px',
-        cursor: 'pointer',
-        fontWeight: 'bold',
-        fontSize: '16px'
-      });
-      sidebarLinks.appendChild(fitcasCarkButton);
-      console.log('FitCas ÇARK butonu eklendi:', fitcasCarkButton);
+    // 1) SIDEBAR BUTONLARINI EKLEYEN FONKSİYON
+    function addCustomButtons() {
+      const sidebarLinks = document.querySelector('.sidebar__links');
+      if (!sidebarLinks) return;
+  
+      // 1) FitCas TV butonu
+      if (!sidebarLinks.querySelector('a[href="https://fitcastv.com/"]')) {
+        const fitcasTVButton = document.createElement('a');
+        fitcasTVButton.href = 'https://fitcastv.com/';
+        fitcasTVButton.textContent = 'FITCAS TV';
+        Object.assign(fitcasTVButton.style, {
+          display: 'block',
+          width: '100%',
+          backgroundColor: '#ffc107',
+          color: '#fff',
+          textAlign: 'center',
+          padding: '14px 0',
+          marginTop: '10px',
+          borderRadius: '10px',
+          cursor: 'pointer',
+          fontWeight: 'bold',
+          fontSize: '16px'
+        });
+        sidebarLinks.appendChild(fitcasTVButton);
+        console.log('FitCas TV butonu eklendi:', fitcasTVButton);
+      }
+  
+      // 2) FitCas ÇARK butonu
+      if (!sidebarLinks.querySelector('a[href="https://api.fitcark.com/wheel/"]')) {
+        const fitcasCarkButton = document.createElement('a');
+        fitcasCarkButton.href = 'https://api.fitcark.com/wheel/';
+        fitcasCarkButton.textContent = 'FITCAS ÇARK';
+        Object.assign(fitcasCarkButton.style, {
+          display: 'block',
+          width: '100%',
+          backgroundColor: '#28a745',
+          color: '#fff',
+          textAlign: 'center',
+          padding: '14px 0',
+          marginTop: '10px',
+          borderRadius: '10px',
+          cursor: 'pointer',
+          fontWeight: 'bold',
+          fontSize: '16px'
+        });
+        sidebarLinks.appendChild(fitcasCarkButton);
+        console.log('FitCas ÇARK butonu eklendi:', fitcasCarkButton);
+      }
+  
+      // 3) Promosyonlar butonu (Arkaplan görseli)
+      if (!sidebarLinks.querySelector('a[href="/tr/promotions"]')) {
+        const promoButton = document.createElement('a');
+        promoButton.href = '/tr/promotions';
+        promoButton.textContent = 'PROMOSYONLAR';
+        Object.assign(promoButton.style, {
+          display: 'block',
+          width: '100%',
+          backgroundImage: 'url("https://raw.githubusercontent.com/allwaysapp/fitcascustom/refs/heads/main/promosyonlar.png")',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          color: '#fff',
+          textAlign: 'center',
+          padding: '14px 0',
+          marginTop: '10px',
+          borderRadius: '10px',
+          cursor: 'pointer',
+          fontWeight: 'bold',
+          fontSize: '16px'
+        });
+        sidebarLinks.appendChild(promoButton);
+        console.log('Promosyonlar butonu eklendi:', promoButton);
+      }
+    }
+  
+    // 2) HEADER BUTONLARINI EKLEYEN FONKSİYON
+    function addHeaderLinks() {
+      const headerActions = document.querySelector('.header__actions');
+      if (!headerActions) return;
+      const signInBtn = headerActions.querySelector('.header__signin');
+  
+      // 1) Fit TV linki
+      if (!headerActions.querySelector('.header__fitTv')) {
+        const fitTvLink = document.createElement('a');
+        fitTvLink.className = 'header__fitTv';
+        fitTvLink.href = 'https://fitcastv.com/';
+        fitTvLink.target = '_blank';
+        Object.assign(fitTvLink.style, {
+          display: 'inline-flex',
+          alignItems: 'center',
+          backgroundImage: 'linear-gradient(to right, #43e97b 0%, #38f9d7 100%)',
+          borderRadius: '8px',
+          color: '#fff',
+          padding: '8px 12px',
+          fontWeight: 'bold',
+          textDecoration: 'none',
+          cursor: 'pointer',
+          marginRight: '8px'
+        });
+        fitTvLink.innerHTML = `
+          <img 
+            src="https://github.com/allwaysapp/fitcascustom/blob/main/tv.png?raw=true" 
+            alt="Fit TV Icon" 
+            style="width:20px;height:auto;margin-right:8px;"
+          />
+          <span>Fit TV</span>`;
+        if (signInBtn) headerActions.insertBefore(fitTvLink, signInBtn);
+        else headerActions.appendChild(fitTvLink);
+        console.log('Fit TV linki eklendi:', fitTvLink);
+      }
+  
+      // 2) Fit ÇARK linki
+      if (!headerActions.querySelector('.header__fitCark')) {
+        const fitCarkLink = document.createElement('a');
+        fitCarkLink.className = 'header__fitCark';
+        fitCarkLink.href = 'https://api.fitcark.com/wheel/';
+        fitCarkLink.target = '_blank';
+        Object.assign(fitCarkLink.style, {
+          display: 'inline-flex',
+          alignItems: 'center',
+          backgroundImage: 'linear-gradient(to right, #ff0844 0%, #ffb199 100%)',
+          borderRadius: '8px',
+          color: '#fff',
+          padding: '8px 12px',
+          fontWeight: 'bold',
+          textDecoration: 'none',
+          cursor: 'pointer'
+        });
+        fitCarkLink.innerHTML = `
+          <img 
+            src="https://github.com/allwaysapp/fitcascustom/blob/main/wheel.png?raw=true" 
+            alt="Fit ÇARK Icon" 
+            style="width:20px;height:auto;margin-right:8px;"
+          />
+          <span>Fit ÇARK</span>`;
+        if (signInBtn) headerActions.insertBefore(fitCarkLink, signInBtn);
+        else headerActions.appendChild(fitCarkLink);
+        console.log('Fit ÇARK linki eklendi:', fitCarkLink);
+      }
     }
 
-    // 3) Promosyonlar butonu (Arkaplan görseli)
-    if (!sidebarLinks.querySelector('a[href="/tr/promotions"]')) {
-      const promoButton = document.createElement('a');
-      promoButton.href = '/tr/promotions';
-      promoButton.textContent = 'PROMOSYONLAR';
-      Object.assign(promoButton.style, {
-        display: 'block',
-        width: '100%',
-        backgroundImage: 'url("https://raw.githubusercontent.com/allwaysapp/fitcascustom/refs/heads/main/promosyonlar.png")',
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        color: '#fff',
-        textAlign: 'center',
-        padding: '14px 0',
-        marginTop: '10px',
-        borderRadius: '10px',
-        cursor: 'pointer',
-        fontWeight: 'bold',
-        fontSize: '16px'
-      });
-      sidebarLinks.appendChild(promoButton);
-      console.log('Promosyonlar butonu eklendi:', promoButton);
-    }
-  }
+    // --- 0) CUSTOM SECTIONS'İ OLARAK EKLEYEN FONKSİYON ---
+    function createCustomSections() {
+        // Navigasyon sırasında veya anasayfa değilse ekleme
+        if (isNavigating || !isHomePage()) {
+            removeCustomSections();
+            return;
+        }
 
-  // 2) HEADER BUTONLARINI EKLEYEN FONKSİYON
-  function addHeaderLinks() {
-    const headerActions = document.querySelector('.header__actions');
-    if (!headerActions) return;
-    const signInBtn = headerActions.querySelector('.header__signin');
+        const parent = document.querySelector('#top-games-wrapper')?.parentNode;
+        if (!parent) return;
 
-    // 1) Fit TV linki
-    if (!headerActions.querySelector('.header__fitTv')) {
-      const fitTvLink = document.createElement('a');
-      fitTvLink.className = 'header__fitTv';
-      fitTvLink.href = 'https://fitcastv.com/';
-      fitTvLink.target = '_blank';
-      Object.assign(fitTvLink.style, {
-        display: 'inline-flex',
-        alignItems: 'center',
-        backgroundImage: 'linear-gradient(to right, #43e97b 0%, #38f9d7 100%)',
-        borderRadius: '8px',
-        color: '#fff',
-        padding: '8px 12px',
-        fontWeight: 'bold',
-        textDecoration: 'none',
-        cursor: 'pointer',
-        marginRight: '8px'
-      });
-      fitTvLink.innerHTML = `
-        <img 
-          src="https://github.com/allwaysapp/fitcascustom/blob/main/tv.png?raw=true" 
-          alt="Fit TV Icon" 
-          style="width:20px;height:auto;margin-right:8px;"
-        />
-        <span>Fit TV</span>`;
-      if (signInBtn) headerActions.insertBefore(fitTvLink, signInBtn);
-      else headerActions.appendChild(fitTvLink);
-      console.log('Fit TV linki eklendi:', fitTvLink);
+        // 1) Eğer daha önce eklenmemişse custom-section1
+        if (!document.querySelector('.custom-section1')) {
+            const sec1 = document.createElement('div');
+            sec1.className = 'container custom-section1 section';
+            sec1.innerHTML = `<img src="https://github.com/allwaysapp/fitcascustom/blob/main/homepage-banner.gif?raw=true" alt="">`;
+            parent.insertBefore(sec1, document.getElementById('top-games-wrapper'));
+        }
+
+        // 2) Eğer daha önce eklenmemişse custom-section2
+        if (!document.querySelector('.custom-section2')) {
+            const sec2 = document.createElement('div');
+            sec2.className = 'container custom-section2 section';
+            sec2.innerHTML = `
+                <div class="custom-section2-item">
+                    <img src="https://github.com/allwaysapp/fitcascustom/blob/main/nasil-yatirim-yapilir.png?raw=true" alt="">
+                </div>
+                <a class="custom-section2-item" href="/blog">
+                    <img src="https://github.com/allwaysapp/fitcascustom/blob/main/blog-yazilarini-kesfet.png?raw=true" alt="">
+                </a>
+                <a class="custom-section2-item" href="/promotions">
+                    <img src="https://github.com/allwaysapp/fitcascustom/blob/main/bonuslara-goz-at.png?raw=true" alt="">
+                </a>
+                <div class="custom-section2-item">
+                    <img src="https://github.com/allwaysapp/fitcascustom/blob/main/buyuk-kazanclar.png?raw=true" alt="">
+                </div>`;
+            parent.insertBefore(sec2, document.getElementById('top-games-wrapper'));
+        }
     }
 
-    // 2) Fit ÇARK linki
-    if (!headerActions.querySelector('.header__fitCark')) {
-      const fitCarkLink = document.createElement('a');
-      fitCarkLink.className = 'header__fitCark';
-      fitCarkLink.href = 'https://api.fitcark.com/wheel/';
-      fitCarkLink.target = '_blank';
-      Object.assign(fitCarkLink.style, {
-        display: 'inline-flex',
-        alignItems: 'center',
-        backgroundImage: 'linear-gradient(to right, #ff0844 0%, #ffb199 100%)',
-        borderRadius: '8px',
-        color: '#fff',
-        padding: '8px 12px',
-        fontWeight: 'bold',
-        textDecoration: 'none',
-        cursor: 'pointer'
-      });
-      fitCarkLink.innerHTML = `
-        <img 
-          src="https://github.com/allwaysapp/fitcascustom/blob/main/wheel.png?raw=true" 
-          alt="Fit ÇARK Icon" 
-          style="width:20px;height:auto;margin-right:8px;"
-        />
-        <span>Fit ÇARK</span>`;
-      if (signInBtn) headerActions.insertBefore(fitCarkLink, signInBtn);
-      else headerActions.appendChild(fitCarkLink);
-      console.log('Fit ÇARK linki eklendi:', fitCarkLink);
+    // Custom section'ları kaldıran fonksiyon
+    function removeCustomSections() {
+        const sections = document.querySelectorAll('.custom-section1, .custom-section2');
+        sections.forEach(section => {
+            if (section && section.parentNode) {
+                section.parentNode.removeChild(section);
+            }
+        });
     }
-  }
 
-  // 3) BANNER ve ORDER DÜZENİ
-  const bannersWrapper = document.getElementById('banners-wrapper');
-  const topGamesWrapper = document.getElementById('top-games-wrapper');
-  if (bannersWrapper && topGamesWrapper && topGamesWrapper.parentNode) {
-    topGamesWrapper.parentNode.insertBefore(bannersWrapper, topGamesWrapper);
-  }
+    // --- 3) SIRALAMA ---  
+    function reorderSections() {
+        // Navigasyon sırasında veya anasayfa değilse sıralamayı değiştirme
+        if (isNavigating || !isHomePage()) return;
 
-  // 4) SAYFA YÜKLENİRKEN İLK ÇAĞRI
-  addCustomButtons();
-  addHeaderLinks();
-
-  // 5) MUTATIONOBSERVER’LAR
-  const sidebarObserver = new MutationObserver((mutations, obs) => {
-    if (document.querySelector('.sidebar__links')) {
-      addCustomButtons();
-      obs.disconnect();
+        const parent = document.querySelector('#top-games-wrapper')?.parentNode;
+        const banners = document.getElementById('banners-wrapper');
+        const sec1 = document.querySelector('.custom-section1');
+        const sec2 = document.querySelector('.custom-section2');
+        const topGames = document.getElementById('top-games-wrapper');
+        
+        if (parent && banners && sec1 && sec2 && topGames) {
+            parent.insertBefore(banners, topGames);
+            parent.insertBefore(sec1, topGames);
+            parent.insertBefore(sec2, topGames);
+        }
     }
-  });
-  sidebarObserver.observe(document.body, { childList: true, subtree: true });
 
-  const headerObserver = new MutationObserver((mutations, obs) => {
-    if (document.querySelector('.header__actions')) {
-      addHeaderLinks();
-      obs.disconnect();
+    // --- Sayfa içeriğini güncelleyen ana fonksiyon --- 
+    function initializePage() {
+        // URL kontrolü
+        const currentIsHomePage = isHomePage();
+        
+        // Butonlar ve linkler her sayfada gösterilir
+        addCustomButtons();
+        addHeaderLinks();
+        
+        // Custom sections sadece anasayfada gösterilir
+        if (currentIsHomePage) {
+            createCustomSections();
+            reorderSections();
+        } else {
+            removeCustomSections();
+        }
     }
-  });
-  headerObserver.observe(document.body, { childList: true, subtree: true });
 
-  // 6) CLIENT‐SIDE NAVIGATION: sadece "/tr/promotions" linkinin tam reload yapmasını engelle
-  document.body.addEventListener('click', function(e) {
-    const promoLink = e.target.closest('a[href="/tr/promotions"]');
-    if (!promoLink) return;
-    e.preventDefault();
-    const path = promoLink.getAttribute('href');
-    window.history.pushState({}, '', path);
-    window.dispatchEvent(new PopStateEvent('popstate'));
-  });
+    // İç sayfa linklerine tıklandığında önleyici işlem
+    function setupLinkInterceptors() {
+        // Sayfadaki tüm linkleri dinle
+        document.body.addEventListener('click', function(e) {
+            // Link tıklamalarını yakala
+            const link = e.target.closest('a');
+            if (!link) return;
+            
+            // Link mevcut sayfada açılacaksa (target="_blank" değilse)
+            if (!link.target || link.target === '_self') {
+                const href = link.getAttribute('href');
+                // Eğer site içi link ise
+                if (href && href.startsWith('/')) {
+                    // Navigasyon başlıyor, flag'i set et
+                    isNavigating = true;
+                    // Custom section'ları hemen kaldır
+                    removeCustomSections();
+                    
+                    // Navigasyon tamamlandıktan sonra flag'i resetle
+                    setTimeout(() => {
+                        isNavigating = false;
+                        initializePage();
+                    }, 500);
+                }
+            }
+        });
+    }
 
+    // 3) BANNER ve ORDER DÜZENİ
+    function setupInitialOrder() {
+        if (isHomePage()) {
+            const bannersWrapper = document.getElementById('banners-wrapper');
+            const topGamesWrapper = document.getElementById('top-games-wrapper');
+            if (bannersWrapper && topGamesWrapper && topGamesWrapper.parentNode) {
+                topGamesWrapper.parentNode.insertBefore(bannersWrapper, topGamesWrapper);
+            }
+        }
+    }
+
+    // İlk sayfa yüklenmesi
+    function initialize() {
+        setupInitialOrder();
+        initializePage();
+        setupLinkInterceptors();
+    }
+
+    // Sayfa yüklendiğinde ilk çalıştırma
+    initialize();
+
+    // URL değişikliklerini izle (SPA'lar için)
+    function handleUrlChange() {
+        // Navigasyon başlıyor, flag'i set et
+        isNavigating = true;
+        // Custom section'ları hemen kaldır
+        removeCustomSections();
+        
+        // URL değişikliği tamamlandıktan sonra initialize et
+        setTimeout(() => {
+            isNavigating = false;
+            initializePage();
+        }, 500);
+    }
+
+    // popstate olayını dinle (geri/ileri butonları)
+    window.addEventListener('popstate', handleUrlChange);
+    
+    // SPA route değişikliklerini yakalamak için history API'larını override et
+    const originalPushState = history.pushState;
+    history.pushState = function() {
+        originalPushState.apply(this, arguments);
+        handleUrlChange();
+    };
+    
+    const originalReplaceState = history.replaceState;
+    history.replaceState = function() {
+        originalReplaceState.apply(this, arguments);
+        handleUrlChange();
+    };
+
+    // CLIENT-SIDE NAVIGATION: sadece "/tr/promotions" linkinin özel işlemi
+    document.body.addEventListener('click', function(e) {
+        const promoLink = e.target.closest('a[href="/tr/promotions"]');
+        if (!promoLink) return;
+        e.preventDefault();
+        
+        // Navigasyon öncesi custom-section'ları kaldır
+        isNavigating = true;
+        removeCustomSections();
+        
+        const path = promoLink.getAttribute('href');
+        window.history.pushState({}, '', path);
+        window.dispatchEvent(new PopStateEvent('popstate'));
+    });
+
+    // --- Observer'lar (dinamik yüklemeler için) ---
+    // Sidebar observer  
+    const sidebarObserver = new MutationObserver((mutations, obs) => {
+        if (document.querySelector('.sidebar__links')) {
+            addCustomButtons();
+            obs.disconnect();
+        }
+    });
+    sidebarObserver.observe(document.body, { childList: true, subtree: true });
+  
+    // Header observer
+    const headerObserver = new MutationObserver((mutations, obs) => {
+        if (document.querySelector('.header__actions')) {
+            addHeaderLinks();
+            obs.disconnect();
+        }
+    });
+    headerObserver.observe(document.body, { childList: true, subtree: true });
+    
+    // Genel içerik değişikliklerini izleyen observer
+    const contentObserver = new MutationObserver((mutations, observer) => {
+        // Navigasyon sırasında observer'ı dikkate alma
+        if (isNavigating) return;
+        
+        // Önemli DOM değişikliklerinde sayfayı tekrar kontrol et
+        const hasImportantChanges = mutations.some(mutation => {
+            return Array.from(mutation.addedNodes).some(node => 
+                node.nodeType === 1 && 
+                (node.id === 'top-games-wrapper' || 
+                 (node.querySelector && node.querySelector('#top-games-wrapper')))
+            );
+        });
+
+        if (hasImportantChanges) {
+            initializePage();
+        }
+    });
+    
+    // Observer'ı başlat
+    contentObserver.observe(document.body, { childList: true, subtree: true });
+    
+    
 })();
