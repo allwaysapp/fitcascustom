@@ -53,7 +53,7 @@
     // 3) Promosyonlar butonu (Arkaplan görseli)
     if (!sidebarLinks.querySelector('a[href="/promotions"]')) {
       const promoButton = document.createElement('a');
-      promoButton.href = '/tr/promotions';
+      promoButton.href = '/promotions';
       promoButton.textContent = 'PROMOSYONLAR';
       
       // Arkaplan resmi ayarları
