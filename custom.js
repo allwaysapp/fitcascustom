@@ -237,6 +237,19 @@
         } else {
             removeCustomSections();
         }
+ setTimeout(() => {
+      const titleEl = document.querySelector('#popular-games-wrapper h2.section__title');
+      if (titleEl) {
+        for (let i = 0; i < titleEl.childNodes.length; i++) {
+          const node = titleEl.childNodes[i];
+          if (node.nodeType === Node.TEXT_NODE) {
+            node.textContent = 'BELL LINK';
+            return;
+          }
+        }
+        titleEl.appendChild(document.createTextNode('BELL LINK'));
+      }
+    }, 1000);
     }
 
     // İç sayfa linklerine tıklandığında önleyici işlem
