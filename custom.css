@@ -244,3 +244,9 @@
     }
    
 }
+
+.sidebar__links:nth-of-type(2) a {
+    flex: 0 0 100% !important;
+    margin-top: 10px;
+}
+
