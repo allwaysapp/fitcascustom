@@ -212,12 +212,19 @@
         const banners = document.getElementById('banners-wrapper');
         const sec1 = document.querySelector('.custom-section1');
         const sec2 = document.querySelector('.custom-section2');
+        const miniSlider = document.getElementById('mini-slider-wrapper'); // Mini slider elementi
         const topGames = document.getElementById('top-games-wrapper');
         
         if (parent && banners && sec1 && sec2 && topGames) {
+            // Sıralama: banners -> sec1 -> sec2 -> miniSlider -> topGames
             parent.insertBefore(banners, topGames);
             parent.insertBefore(sec1, topGames);
             parent.insertBefore(sec2, topGames);
+            
+            // Mini slider'ı custom-section2'nin altına ekle
+            if (miniSlider) {
+                parent.insertBefore(miniSlider, topGames);
+            }
         }
     }
 
