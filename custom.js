@@ -387,5 +387,104 @@
     // Observer'ı başlat
     contentObserver.observe(document.body, { childList: true, subtree: true });
     
+(function () {
+  function setupInvestmentPopup() {
+    const trigger = document.querySelector('.custom-section2-item img[src*="nasil-yatirim-yapilir"]');
+    if (!trigger) return;
+    if (document.getElementById('investmentModal')) return;
+
+    const modal = document.createElement('div');
+    modal.id = 'investmentModal';
+    modal.className = 'investment-modal';
+    modal.style.display = 'none';
+    modal.innerHTML = `
+      <div class="investment-modal-content">
+        <span class="investment-close">&times;</span>
+        <div class="investment-tabs">
+          ${createTabButtons()}
+        </div>
+        <div class="investment-tab-content">
+          ${createTabContents()}
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const tabName = btn.dataset.tab;
+        document.querySelectorAll('.tab-content').forEach(c => {
+          c.classList.remove('active');
+          const iframe = c.querySelector('iframe');
+          if (iframe) iframe.src = iframe.src;
+        });
+        document.getElementById('tab-' + tabName).classList.add('active');
+      });
+    });
+
+    document.querySelector('.investment-close').addEventListener('click', function () {
+      modal.style.display = 'none';
+      modal.querySelectorAll('iframe').forEach(iframe => {
+        iframe.src = iframe.src;
+      });
+    });
+
+    trigger.style.cursor = 'pointer';
+    trigger.addEventListener('click', () => {
+      modal.style.display = 'flex';
+    });
+  }
+
+  function createTabButtons() {
+    const tabs = [
+      { key: 'havale', label: 'Anında Havale' },
+      { key: 'hizli', label: 'Hızlı Havale' },
+      { key: 'papara', label: 'Anında Papara' },
+      { key: 'poppy', label: 'Anında Poppy' },
+      { key: 'parola', label: 'Anında Parola' },
+      { key: 'mefete', label: 'Anında Mefete' }
+    ];
+    return tabs.map((tab, i) =>
+      `<button class="tab-btn ${i === 0 ? 'active' : ''}" data-tab="${tab.key}">${tab.label}</button>`
+    ).join('');
+  }
+
+  function createTabContents() {
+    const contents = {
+      havale: '1095573512?h=aecb26f437',
+      hizli: '1095573418?h=5b4b499045',
+      papara: '1095573326?h=48c4f0b531',
+      poppy: '1095573257?h=cf80f9abc5',
+      parola: '1095573163?h=ffe8b76574',
+      mefete: '1095573079?h=bc40448e04'
+    };
+    return Object.entries(contents).map(([key, video], i) => `
+      <div class="tab-content ${i === 0 ? 'active' : ''}" id="tab-${key}">
+        <div class="video-wrapper">
+          <iframe src="https://player.vimeo.com/video/${video}" frameborder="0" allowfullscreen allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"></iframe>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function waitForTrigger(maxRetries = 20, delay = 500) {
+    let attempts = 0;
+    const interval = setInterval(() => {
+      attempts++;
+      const trigger = document.querySelector('.custom-section2-item img[src*="nasil-yatirim-yapilir"]');
+      if (trigger) {
+        clearInterval(interval);
+        setupInvestmentPopup();
+      } else if (attempts >= maxRetries) {
+        clearInterval(interval);
+      }
+    }, delay);
+  }
+
+  waitForTrigger();
+})();
+
     
 })();
