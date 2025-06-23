@@ -189,7 +189,7 @@
 }
 
 .tab-btn.active {
-  background: #ffc107;
+  background: #ffc107 !important;
   color: #000;
   font-weight: bold;
 }
