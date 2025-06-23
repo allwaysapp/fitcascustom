@@ -22,7 +22,19 @@
         const fitcasTVButton = document.createElement('a');
         fitcasTVButton.href = 'https://fitcastv.com/';
         fitcasTVButton.textContent = 'FITCAS TV';
-        fitcasTVButton.className = 'sidebar-fitcas-tv';
+        Object.assign(fitcasTVButton.style, {
+          display: 'block',
+          width: '100%',
+          backgroundColor: '#ffc107',
+          color: '#fff',
+          textAlign: 'center',
+          padding: '14px 0',
+          marginTop: '10px',
+          borderRadius: '10px',
+          cursor: 'pointer',
+          fontWeight: 'bold',
+          fontSize: '16px'
+        });
         sidebarLinks.appendChild(fitcasTVButton);
         console.log('FitCas TV butonu eklendi:', fitcasTVButton);
       }
@@ -32,17 +44,44 @@
         const fitcasCarkButton = document.createElement('a');
         fitcasCarkButton.href = 'https://api.fitcark.com/wheel/';
         fitcasCarkButton.textContent = 'FITCAS ÇARK';
-        fitcasCarkButton.className = 'sidebar-fitcas-cark';
+        Object.assign(fitcasCarkButton.style, {
+          display: 'block',
+          width: '100%',
+          backgroundColor: '#28a745',
+          color: '#fff',
+          textAlign: 'center',
+          padding: '14px 0',
+          marginTop: '10px',
+          borderRadius: '10px',
+          cursor: 'pointer',
+          fontWeight: 'bold',
+          fontSize: '16px'
+        });
         sidebarLinks.appendChild(fitcasCarkButton);
         console.log('FitCas ÇARK butonu eklendi:', fitcasCarkButton);
       }
   
-      // 3) Promosyonlar butonu
+      // 3) Promosyonlar butonu (Arkaplan görseli)
       if (!sidebarLinks.querySelector('a[href="/tr/promotions"]')) {
         const promoButton = document.createElement('a');
         promoButton.href = '/tr/promotions';
         promoButton.textContent = 'PROMOSYONLAR';
-        promoButton.className = 'sidebar-promosyonlar';
+        Object.assign(promoButton.style, {
+          display: 'block',
+          width: '100%',
+          backgroundImage: 'url("https://raw.githubusercontent.com/allwaysapp/fitcascustom/refs/heads/main/promosyonlar.png")',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          color: '#fff',
+          textAlign: 'center',
+          padding: '14px 0',
+          marginTop: '10px',
+          borderRadius: '10px',
+          cursor: 'pointer',
+          fontWeight: 'bold',
+          fontSize: '16px'
+        });
         sidebarLinks.appendChild(promoButton);
         console.log('Promosyonlar butonu eklendi:', promoButton);
       }
@@ -60,10 +99,23 @@
         fitTvLink.className = 'header__fitTv';
         fitTvLink.href = 'https://fitcastv.com/';
         fitTvLink.target = '_blank';
+        Object.assign(fitTvLink.style, {
+          display: 'inline-flex',
+          alignItems: 'center',
+          backgroundImage: 'linear-gradient(to right, #43e97b 0%, #38f9d7 100%)',
+          borderRadius: '8px',
+          color: '#fff',
+          padding: '8px 12px',
+          fontWeight: 'bold',
+          textDecoration: 'none',
+          cursor: 'pointer',
+          marginRight: '8px'
+        });
         fitTvLink.innerHTML = `
           <img 
             src="https://github.com/allwaysapp/fitcascustom/blob/main/tv.png?raw=true" 
-            alt="Fit TV Icon"
+            alt="Fit TV Icon" 
+            style="width:20px;height:auto;margin-right:8px;"
           />
           <span>Fit TV</span>`;
         if (signInBtn) headerActions.insertBefore(fitTvLink, signInBtn);
@@ -77,10 +129,22 @@
         fitCarkLink.className = 'header__fitCark';
         fitCarkLink.href = 'https://api.fitcark.com/wheel/';
         fitCarkLink.target = '_blank';
+        Object.assign(fitCarkLink.style, {
+          display: 'inline-flex',
+          alignItems: 'center',
+          backgroundImage: 'linear-gradient(to right, #ff0844 0%, #ffb199 100%)',
+          borderRadius: '8px',
+          color: '#fff',
+          padding: '8px 12px',
+          fontWeight: 'bold',
+          textDecoration: 'none',
+          cursor: 'pointer'
+        });
         fitCarkLink.innerHTML = `
           <img 
             src="https://github.com/allwaysapp/fitcascustom/blob/main/wheel.png?raw=true" 
-            alt="Fit ÇARK Icon"
+            alt="Fit ÇARK Icon" 
+            style="width:20px;height:auto;margin-right:8px;"
           />
           <span>Fit ÇARK</span>`;
         if (signInBtn) headerActions.insertBefore(fitCarkLink, signInBtn);
@@ -330,104 +394,104 @@
     // Observer'ı başlat
     contentObserver.observe(document.body, { childList: true, subtree: true });
     
-    // Investment Popup Setup
-    (function () {
-      function setupInvestmentPopup() {
-        const trigger = document.querySelector('.custom-section2-item img[src*="nasil-yatirim-yapilir"]');
-        if (!trigger) return;
-        if (document.getElementById('investmentModal')) return;
+(function () {
+  function setupInvestmentPopup() {
+    const trigger = document.querySelector('.custom-section2-item img[src*="nasil-yatirim-yapilir"]');
+    if (!trigger) return;
+    if (document.getElementById('investmentModal')) return;
 
-        const modal = document.createElement('div');
-        modal.id = 'investmentModal';
-        modal.className = 'investment-modal';
-        modal.style.display = 'none';
-        modal.innerHTML = `
-          <div class="investment-modal-content">
-            <span class="investment-close">&times;</span>
-            <div class="investment-tabs">
-              ${createTabButtons()}
-            </div>
-            <div class="investment-tab-content">
-              ${createTabContents()}
-            </div>
-          </div>
-        `;
-        document.body.appendChild(modal);
+    const modal = document.createElement('div');
+    modal.id = 'investmentModal';
+    modal.className = 'investment-modal';
+    modal.style.display = 'none';
+    modal.innerHTML = `
+      <div class="investment-modal-content">
+        <span class="investment-close">&times;</span>
+        <div class="investment-tabs">
+          ${createTabButtons()}
+        </div>
+        <div class="investment-tab-content">
+          ${createTabContents()}
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
 
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-          btn.addEventListener('click', function () {
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const tabName = btn.dataset.tab;
-            document.querySelectorAll('.tab-content').forEach(c => {
-              c.classList.remove('active');
-              const iframe = c.querySelector('iframe');
-              if (iframe) iframe.src = iframe.src;
-            });
-            document.getElementById('tab-' + tabName).classList.add('active');
-          });
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const tabName = btn.dataset.tab;
+        document.querySelectorAll('.tab-content').forEach(c => {
+          c.classList.remove('active');
+          const iframe = c.querySelector('iframe');
+          if (iframe) iframe.src = iframe.src;
         });
+        document.getElementById('tab-' + tabName).classList.add('active');
+      });
+    });
 
-        document.querySelector('.investment-close').addEventListener('click', function () {
-          modal.style.display = 'none';
-          modal.querySelectorAll('iframe').forEach(iframe => {
-            iframe.src = iframe.src;
-          });
-        });
+    document.querySelector('.investment-close').addEventListener('click', function () {
+      modal.style.display = 'none';
+      modal.querySelectorAll('iframe').forEach(iframe => {
+        iframe.src = iframe.src;
+      });
+    });
 
-        trigger.style.cursor = 'pointer';
-        trigger.addEventListener('click', () => {
-          modal.style.display = 'flex';
-        });
+    trigger.style.cursor = 'pointer';
+    trigger.addEventListener('click', () => {
+      modal.style.display = 'flex';
+    });
+  }
+
+  function createTabButtons() {
+    const tabs = [
+      { key: 'havale', label: 'Anında Havale' },
+      { key: 'hizli', label: 'Hızlı Havale' },
+      { key: 'papara', label: 'Anında Papara' },
+      { key: 'poppy', label: 'Anında Poppy' },
+      { key: 'parola', label: 'Anında Parola' },
+      { key: 'mefete', label: 'Anında Mefete' }
+    ];
+    return tabs.map((tab, i) =>
+      `<button class="tab-btn ${i === 0 ? 'active' : ''}" data-tab="${tab.key}">${tab.label}</button>`
+    ).join('');
+  }
+
+  function createTabContents() {
+    const contents = {
+      havale: '1095573512?h=aecb26f437',
+      hizli: '1095573418?h=5b4b499045',
+      papara: '1095573326?h=48c4f0b531',
+      poppy: '1095573257?h=cf80f9abc5',
+      parola: '1095573163?h=ffe8b76574',
+      mefete: '1095573079?h=bc40448e04'
+    };
+    return Object.entries(contents).map(([key, video], i) => `
+      <div class="tab-content ${i === 0 ? 'active' : ''}" id="tab-${key}">
+        <div class="video-wrapper">
+          <iframe src="https://player.vimeo.com/video/${video}" frameborder="0" allowfullscreen allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"></iframe>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function waitForTrigger(maxRetries = 20, delay = 500) {
+    let attempts = 0;
+    const interval = setInterval(() => {
+      attempts++;
+      const trigger = document.querySelector('.custom-section2-item img[src*="nasil-yatirim-yapilir"]');
+      if (trigger) {
+        clearInterval(interval);
+        setupInvestmentPopup();
+      } else if (attempts >= maxRetries) {
+        clearInterval(interval);
       }
+    }, delay);
+  }
 
-      function createTabButtons() {
-        const tabs = [
-          { key: 'havale', label: 'Anında Havale' },
-          { key: 'hizli', label: 'Hızlı Havale' },
-          { key: 'papara', label: 'Anında Papara' },
-          { key: 'poppy', label: 'Anında Poppy' },
-          { key: 'parola', label: 'Anında Parola' },
-          { key: 'mefete', label: 'Anında Mefete' }
-        ];
-        return tabs.map((tab, i) =>
-          `<button class="tab-btn ${i === 0 ? 'active' : ''}" data-tab="${tab.key}">${tab.label}</button>`
-        ).join('');
-      }
+  waitForTrigger();
+})();
 
-      function createTabContents() {
-        const contents = {
-          havale: '1095573512?h=aecb26f437',
-          hizli: '1095573418?h=5b4b499045',
-          papara: '1095573326?h=48c4f0b531',
-          poppy: '1095573257?h=cf80f9abc5',
-          parola: '1095573163?h=ffe8b76574',
-          mefete: '1095573079?h=bc40448e04'
-        };
-        return Object.entries(contents).map(([key, video], i) => `
-          <div class="tab-content ${i === 0 ? 'active' : ''}" id="tab-${key}">
-            <div class="video-wrapper">
-              <iframe src="https://player.vimeo.com/video/${video}" frameborder="0" allowfullscreen allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"></iframe>
-            </div>
-          </div>
-        `).join('');
-      }
-
-      function waitForTrigger(maxRetries = 20, delay = 500) {
-        let attempts = 0;
-        const interval = setInterval(() => {
-          attempts++;
-          const trigger = document.querySelector('.custom-section2-item img[src*="nasil-yatirim-yapilir"]');
-          if (trigger) {
-            clearInterval(interval);
-            setupInvestmentPopup();
-          } else if (attempts >= maxRetries) {
-            clearInterval(interval);
-          }
-        }, delay);
-      }
-
-      waitForTrigger();
-    })();
     
 })();
