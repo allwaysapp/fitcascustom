@@ -215,3 +215,17 @@
   height: 100%;
   border: none;
 }
+
+.mid-me {
+    border-radius: 12px;
+    box-shadow: 0 4px 8px var(--tf-border);
+    cursor: pointer;
+    display: inline-block;
+    height: auto !important;
+    object-fit: cover;
+    overflow: hidden;
+    position: relative;
+    transform: scale(1) rotate(0deg);
+    transition: transform .4s ease-in-out, opacity .4s ease-in-out, box-shadow .4s ease-in-out;
+    width: 100% !important;
+}
